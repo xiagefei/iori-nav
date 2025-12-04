@@ -61,44 +61,6 @@
 
     ![创建D1数据库](https://github.com/user-attachments/assets/f49d61ea-a87b-42ed-a460-98e53fb340e0)
 
-3.  进入数据库的`控制台`，执行下方的 SQL 语句来快速创建所需的表结构。(注意移除中文注释)
-
-    ![执行SQL](https://github.com/user-attachments/assets/be10c3a0-a862-467a-8114-d5c5c8e48d2a)
-
-```sql
--- 创建已发布网站表
-CREATE TABLE sites (
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-name TEXT NOT NULL,
-url TEXT NOT NULL,
-logo TEXT,
-"desc" TEXT,
-catelog TEXT NOT NULL,
-status TEXT,
-sort_order INTEGER NOT NULL DEFAULT 9999,
-create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-update_time DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
--- 创建待审核网站表
-CREATE TABLE pending_sites (
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-name TEXT NOT NULL,
-url TEXT NOT NULL,
-logo TEXT,
-"desc" TEXT,
-catelog TEXT NOT NULL,
-status TEXT,
-create_time DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
--- 创建分类排序表
-CREATE TABLE category_orders (
-catelog TEXT PRIMARY KEY,
-sort_order INTEGER NOT NULL DEFAULT 9999
-);
-```
-> **提示**: 使用 SQL 是最快捷的方式。如果你想手动建表，请确保字段名、类型与上述 SQL 一致。
 
 ### 步骤 2: 创建 KV 存储
 
@@ -117,15 +79,21 @@ sort_order INTEGER NOT NULL DEFAULT 9999
 ## 🚀 一键部署
 
 [![Fork on GitHub](https://img.shields.io/badge/Fork-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/jy02739244/iori-nav/fork)
-[![Deploy to Cloudflare Pages](https://img.shields.io/badge/Deploy-Cloudflare%20Pages-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://dash.cloudflare.com/?to=/:account/pages)
+
+[![Deploy to Cloudflare Pages](https://img.shields.io/badge/Deploy-Cloudflare%20Pages-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://dash.cloudflare.com/?to=/:account/pages/new/provider/github)
 
 ### 部署步骤:
 
 1. **Fork 本仓库**: 点击上方"Fork on GitHub"按钮
 2. **连接到 Cloudflare Pages**: 
-   - 点击"Deploy to Cloudflare Pages"按钮
-   - 选择你 Fork 的仓库
-   - 完成后续的 D1 和 KV 配置(见下方详细步骤)
+   - 点击上方"Deploy to Cloudflare Pages"按钮
+   - 登录后会自动跳转到 GitHub 连接页面
+   - 授权并选择你 Fork 的 `iori-nav` 仓库
+   - 配置构建设置(保持默认即可)
+   - 点击"保存并部署"
+3. **配置数据库和存储**: 完成后续的 D1 和 KV 配置(见下方详细步骤) 👇
+
+
 
 
 ### 步骤 4: 绑定服务
