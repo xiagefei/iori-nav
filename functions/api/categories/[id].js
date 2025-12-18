@@ -17,6 +17,24 @@ export async function onRequestPut(context) {
     }
 
     if (body && body.reset) {
+      // 1. Check for sub-categories
+      const hasChildren = await env.NAV_DB.prepare('SELECT id FROM category WHERE parent_id = ? LIMIT 1')
+        .bind(categoryId)
+        .first();
+        
+      if (hasChildren) {
+        return errorResponse('无法删除：该分类包含子分类，请先删除或移动子分类', 400);
+      }
+
+      // 2. Check for associated sites (bookmarks)
+      const hasSites = await env.NAV_DB.prepare('SELECT id FROM sites WHERE catelog_id = ? LIMIT 1')
+        .bind(categoryId)
+        .first();
+        
+      if (hasSites) {
+        return errorResponse('无法删除：该分类包含书签，请先删除或移动书签', 400);
+      }
+
       await env.NAV_DB.prepare('DELETE FROM category WHERE id = ?')
         .bind(categoryId)
         .run();

@@ -1,4 +1,3 @@
-
 /* Custom Cascading Dropdown */
 .custom-dropdown-wrapper {
   position: relative;
@@ -43,6 +42,12 @@
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   z-index: 1000;
   margin-top: 2px;
+}
+
+/* Specific style for Category Filter to be wider */
+#categoryFilterWrapper .custom-dropdown-menu {
+  width: 200%; /* Make it 2x wider as requested */
+  min-width: 250px; /* Ensure a minimum readable width */
 }
 
 .custom-dropdown-menu.show {
