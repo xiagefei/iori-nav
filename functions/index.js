@@ -453,6 +453,8 @@ export async function onRequest(context) {
   }
 
   // 替换所有模板占位符（单次正则匹配 + 映射表）
+  const canonicalUrl = `${url.origin}/`;
+  const ogImageUrl = `${url.origin}/favicon.svg`;
   const replacements = {
     'HEADER_CONTENT': headerContent,
     'HEADER_CLASS': headerClass,
@@ -463,6 +465,8 @@ export async function onRequest(context) {
     'RIGHT_TOP_ACTION': topRightActionsHtml,
     'SITE_NAME': escapeHTML(siteName),
     'SITE_DESCRIPTION': escapeHTML(siteDescription),
+    'CANONICAL_URL': escapeHTML(canonicalUrl),
+    'OG_IMAGE_URL': escapeHTML(ogImageUrl),
     'FOOTER_TEXT': escapeHTML(footerText),
     'CATALOG_EXISTS': catalogExists ? 'true' : 'false',
     'CATALOG_LINKS': catalogLinkMarkup,
